@@ -79,19 +79,29 @@
 
 
 
-const express =  require('express');
+const express = require('express');
 const app = express();
-const path =  require("path");
+const path = require("path");
+const usermodel = require('./models/user');
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname , 'public')));
-app.set("view engine" , "ejs");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set("view engine", "ejs");
 
-app.get("/" , function(req , res){
+app.get("/", function (req, res) {
     res.render("view")
 })
-app.get("/read" , function(req , res){
-    res.render("read")
+app.get("/read", async (req, res)=> {
+   let users =  await usermodel.find()
+    res.render("read" , {users});
+})
+app.post("/create",  async (req, res) => {
+    let {name ,  email , imgurl } = req.body;
+
+    let createduser  = await usermodel.create({
+        name,email,imgurl  
+    })
+    res.send(createduser);
 })
 app.listen(3000);

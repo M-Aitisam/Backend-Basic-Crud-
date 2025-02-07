@@ -19,26 +19,22 @@
         <h1 class="text-3xl tracking-tighter mb-3"> ALL User</h1>
        
         <div class="users flex flex-wrap gap-3">
+          <% users.forEach(function(user){ %>
+            <div class="user w-72  p-4 bg-zinc-800 rounded-lg">
+                <div class="w-full h-72 rounded-lg over-flow-hidden bg-zinc-700">
+                    <img class="w-full h-full object-cover object-top " src="<%= user.imgurl %>" alt="">
+                </div>
+                <h3 class="text-xl mt-3 tracking-tighter"><%= user.name %></h3>
+                <h5 class="text-zinc-500"><%= user.email %></h5>
+                <div class="flex gap-3 px-3 justify-between mt-7">
+                    <a class="text-zinc-300" href="">Edit User</a>
+                    <a class="text-red-600" href="">Delete User</a>
+                </div>
+            </div>
+           
+          <% }) %>
             <!-- user 1 -->
-            <div class="user w-72  p-4 bg-zinc-800 rounded-lg">
-                <div class="w-full h-52 rounded-lg bg-zinc-700"></div>
-                <h3 class="text-xl mt-3 tracking-tighter">Aitisam Ahmed</h3>
-                <h5 class="text-zinc-500">aitisam24@gmail.com</h5>
-                <div class="flex gap-3 px-3 justify-between mt-7">
-                    <a class="text-zinc-300" href="">Edit User</a>
-                    <a class="text-red-600" href="">Delete User</a>
-                </div>
-            </div>
-            <!-- user 2 -->
-            <div class="user w-72  p-4 bg-zinc-800 rounded-lg">
-                <div class="w-full h-52 rounded-lg bg-zinc-700"></div>
-                <h3 class="text-xl mt-3 tracking-tighter">Aitisam Ahmed</h3>
-                <h5 class="text-zinc-500">aitisam24@gmail.com</h5>
-                <div class="flex gap-3 px-3 justify-between mt-7">
-                    <a class="text-zinc-300" href="">Edit User</a>
-                    <a class="text-red-600" href="">Delete User</a>
-                </div>
-            </div>
+            
         </div>
     </div>
 </body>
