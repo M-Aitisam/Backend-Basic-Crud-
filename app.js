@@ -90,7 +90,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 
 app.get("/", function (req, res) {
-    res.render("view")
+    res.render("index")
 })
 app.get("/read", async (req, res)=> {
    let users =  await usermodel.find()
@@ -110,4 +110,14 @@ app.get("/delete/:id", async (req, res)=> {
      res.redirect("/read" );
  })
 
+ app.get("/edit/:userid", async (req, res)=> {
+ const user = await usermodel.findOne({_id :req.params.userid})
+      res.render("edit" , {user} );
+  })
+  app.post("/update/:userid", async (req, res)=> {
+    let {name ,  email , imgurl } = req.body;
+    const user = await usermodel.findOneAndUpdate({_id :req.params.userid} , {imgurl , name , email} ,  {new:true})
+         res.redirect("/read");
+     })
+   
 app.listen(3000);
