@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All User </title>
+    <title>All Users</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-
- 
+    <link rel="shortcut icon" href="/images/penguin.png" type="image/x-icon">
 </head>
 <body>
-    <div class="bg-zinc-900  w-full h-full text-white p-10">
-        <div class=" bg-zinc-900 pb-10 text-white">
+    <div class="bg-zinc-900 w-full h-full text-white p-10">
+        <div class="bg-zinc-900 pb-10 text-white">
             <div class="nav">
-                <a class="text-zinc-600" href="/"> <- BACK TO HOME</a>
+                <a class="text-zinc-600" href="/"> ← BACK TO HOME</a>
             </div>
         </div>
-        <h1 class="text-3xl tracking-tighter mb-3"> ALL User</h1>
-       
+        <h1 class="text-3xl tracking-tighter mb-3">ALL Users</h1>
+
         <div class="users flex flex-wrap gap-3">
-          <% users.forEach(function(user){ %>
-            <div class="user w-72  p-4 bg-zinc-800 rounded-lg">
-                <div class="w-full h-72 rounded-lg over-flow-hidden bg-zinc-700">
-                    <img class="w-full h-full object-cover object-top " src="<%= user.imgurl %>" alt="">
-                </div>
-                <h3 class="text-xl mt-3 tracking-tighter"><%= user.name %></h3>
-                <h5 class="text-zinc-500"><%= user.email %></h5>
-                <div class="flex gap-3 px-3 justify-between mt-7">
-                    <a class="text-zinc-300" href="">Edit User</a>
-                    <a class="text-red-600" href="">Delete User</a>
-                </div>
-            </div>
-           
-          <% }) %>
-            <!-- user 1 -->
+            <% if(users.length === 0) { %>
             
+                <p class="text-zinc-500 text-2xl  py-4 rounded-lg">No Users Found</p>
+            <% } else { %>
+                <% users.forEach(function(user) { %>
+                    <div class="user w-72 p-4 bg-zinc-800 rounded-lg">
+                        <div class="w-full h-72 rounded-lg overflow-hidden bg-zinc-700">
+                            <img class="w-full h-full object-cover object-top" src="<%= user.imgurl %>" alt="User Image">
+                        </div>
+                        <h3 class="text-xl mt-3 tracking-tighter"><%= user.name %></h3>
+                        <h5 class="text-zinc-500"><%= user.email %></h5>
+                        <div class="flex gap-3 px-3 justify-between mt-7">
+                            <a class="text-zinc-300" href="">Edit User</a>
+                            <a class="text-red-600" href="/delete/<%= user._id %>">Delete User</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
         </div>
     </div>
 </body>

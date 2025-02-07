@@ -104,4 +104,10 @@ app.post("/create",  async (req, res) => {
     })
     res.send(createduser);
 })
+
+app.get("/delete/:id", async (req, res)=> {
+   await usermodel.findOneAndDelete({_id :req.params.id})
+     res.redirect("/read" );
+ })
+
 app.listen(3000);
