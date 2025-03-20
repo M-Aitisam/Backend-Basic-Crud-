@@ -6,20 +6,20 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/M-Aitisam/Backend-Basic-Crud-.git'
             }
         }
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building the project...'
+                sh 'docker build -t my-app .'
             }
         }
-        stage('Test') {
+        stage('Run Docker Container') {
             steps {
-                echo 'Running tests...'
+                sh 'docker run -d -p 5000:5000 --name my-app-container my-app'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-            }
+    }
+    post {
+        success {
+            echo "Application deployed! Access it at http://<JENKINS_SERVER_IP>:5000"
         }
     }
 }
